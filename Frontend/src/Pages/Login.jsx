@@ -1,16 +1,34 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
+
+
 const Login = () => {
+    const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+
+  useEffect(()=>{
+    alreadylogged();
+  } ,[])
+    const alreadylogged = async ()=>{
+        const tokenis = localStorage.getItem("token")
+        if(tokenis){
+            navigate("/")
+
+        }
+    }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
+
+    
     console.log("Sending request to backend...");
   
     try {
@@ -27,6 +45,7 @@ const Login = () => {
       alert("Login failed!");
     } finally {
       setLoading(false);
+      navigate("/")
     }
   };
   

@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState , useEffect} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
+
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name , setname] = useState("")
   const [loading, setLoading] = useState(false);
+
+
+    useEffect(()=>{
+      alreadylogged();
+    } ,[])
+      const alreadylogged = async ()=>{
+          const tokenis = localStorage.getItem("token")
+          if(tokenis){
+              navigate("/")
+  
+          }
+      }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
