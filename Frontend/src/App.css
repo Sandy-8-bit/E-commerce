@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .hover-scale {
+    transition: transform 0.2s ease-in-out;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  .primary {
+    color: #dc3912;
+  }
+
+  .background{
+    background: linear-gradient(180deg, #000 0%, #402283 63.67%, #9F64DA 126.07%);
+  }
+
+  /* } //generate a gray to black border gradient */
+}
