@@ -7,14 +7,29 @@ const Navbar = () => {
   const [name, setName] = useState("");
   const [search, setSearch] = useState("");
   const [profile, setProfile] = useState("");
+  const[logged,setlooged] = useState(localStorage.getItem("token"))
   const location = useLocation();
 
   useEffect(() => {
     if (token) {
       getUserData();
-
+      
+    }
+    else{
+        setName("")
+        setProfile("")
     }
   }, [token]);
+
+
+
+
+
+  const logout = ()=>{
+    localStorage.removeItem("token")
+    setlooged(false)
+    
+  }
 
 
   const getUserData = async () => {
@@ -81,6 +96,7 @@ const Navbar = () => {
           <img src="./Profile.png" alt="profile" className="cursor-pointer w-7 h-7 rounded-full object-cover" />
         )}
         {name && <p className="text-gray-700 font-medium">{name}</p>}
+        {name && <button onClick={logout}>Logout</button>}
       </div>
     </div>
   );

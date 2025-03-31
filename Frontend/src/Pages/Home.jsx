@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar'
 import Login from './Login'
 import Hero from "../Hero/Hero"
 import Scroll from '../Scroll/Scroll'
+import Browse from '../Browse/Browse'
 
 const Home = () => {
   return (
@@ -15,10 +16,13 @@ const Home = () => {
         <Hero/>
 
         </div>
-        <div className="scroll">
+     </div>
+     <div className="scroll">
             <Scroll/>
         </div>
-     </div>
+        <div className='px-[100px] mt-[50px]'>
+            <Browse/>
+        </div>
     
       </div>
     
