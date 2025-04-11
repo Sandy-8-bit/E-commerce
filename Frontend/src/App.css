@@ -18,5 +18,118 @@
     background: linear-gradient(180deg, #000 0%, #402283 63.67%, #9F64DA 126.07%);
   }
 
-  /* } //generate a gray to black border gradient */
+  /* Optional: Add Tailwind Utility Class */
+.Intergal-cf{
+  font-family: 'Intergal', sans-serif;
+}
+
+  .Satoshi{
+    font-family: 'Satoshi', sans-serif;
+  }
+
+  /* Hide scrollbar for WebKit-based browsers (Chrome, Safari, Edge) */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  /* Hide scrollbar for all browsers */
+
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+
+}
+
+
+/* Hide scrollbar for all browsers */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  
+
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari, Edge) */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+ 
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and newer Edge */
+}
+
+.scroll-container {
+  display: flex;
+  gap: 5px;
+  animation: scroll-left 20s linear infinite;
+}
+
+.testimonial {
+  min-width: 400px;
+  height: 240px;
+  border-radius: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); /* Scroll by the full width of the container */
+  }
+}
+
+@font-face {
+  font-family: 'Intergal'; /* Custom font name */
+  src: url('../public/Font/INTERGAL-CF/Fontspring-DEMO-integralcf-demibold.otf') format('opentype'); /* Path to the font */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi'; /* Custom font name */
+  src: url('../public/Font/Satoshi/Satoshi-Variable.ttf') format('opentype'); /* Path to the font */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*Contact us*/
+input:-webkit-autofill {
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  box-shadow: 0 0 0 1000px white inset !important;
+  color: #000 !important;
 }

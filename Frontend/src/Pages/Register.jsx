@@ -44,11 +44,14 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center w-screen h-screen bg-gradient-to-b from-black via-[#402283] to-[#9F64DA] font-satoshi">
-      <div className="flex flex-col justify-center items-center max-w-[960px] w-full">
-        <div className="content flex rounded-[9px] bg-black/10 backdrop-blur-[70.9px] p-6">
-          <div className="top-1 w-[470px] p-[26px] flex flex-col justify-between">
+      <div className="flex flex-col justify-center items-center w-full md:max-w-[960px] p-4 ">
+        <div className="content flex rounded-[9px] bg-black/10 backdrop-blur-[70.9px] px-2 py-8 md:p-10 shadow-lg gap-4 md:gap-0 md:flex-row justify-center items-center w-full h-full md:h-[500px] overflow-hidden relative">
+          <div className="top-1 w-full p-[26px] flex flex-col justify-between">
             <div className="w-full flex items-center flex-col">
-              <h2 className="text-red-500 text-[36px] font-black">Welcome To Shopyfy</h2>
+            <h2 className="text-red-500 text-[clamp(1.75rem,5vw,2.5rem)] font-black">
+  Welcome To Shopyfy
+</h2>
+
               <p className="text-white text-[18px]">Register  to your login</p>
             </div>
 
@@ -120,7 +123,7 @@ const Register = () => {
           </div>
 
           {/* Right Image Section */}
-          <div className="top-2">
+          <div className="top-2 hidden md:block">
             <img src="./right.png" alt="login" className="h-[500px]" />
           </div>
         </div>

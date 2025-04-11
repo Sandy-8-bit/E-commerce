@@ -5,8 +5,13 @@ const PORT = 5000;
 const MONGO_URI = "mongodb://localhost:27017/E-commerce";
 const app = express();
 const routes = require("../Backend/Routes/authRoutes")
+const product = require("../Backend/Routes/Admin")
+const getss = require("../Backend/Routes/Products")
+const mail = require("../Backend/Routes/Email")
+const cart = require("../Backend/Routes/Cart")
 
 const cors = require("cors");
+const router = require("./Routes/Admin");
 app.use(cors());
 
 mongoose.connect(MONGO_URI)
@@ -15,8 +20,10 @@ mongoose.connect(MONGO_URI)
 
 app.use(express.json());
 app.use(routes);
-
-
+app.use(product);
+app.use(mail);
+app.use(getss);
+app.use(cart);
 
 
 

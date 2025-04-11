@@ -9,22 +9,17 @@ exports.register = async (req, res) => {
   const { name, email, password, role } = req.body;
 
   try {
-    // Check if user already exists
     let user = await User.findOne({ email });
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    //  Hash password before creating user )
-    const hashedPassword = bcrypt.hashSync(password, 8);
+    // ✅ No manual hashing here!
+    user = new User({ name, email, password, role });
+    await user.save(); // The pre-save hook will hash the password
 
-    // Create new user
-    user = new User({ name, email, password: hashedPassword, role });
-    await user.save();
-
-    // Generate JWT Token 
     const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, {
-      expiresIn: "7d", // Token valid for 7 days
+      expiresIn: "7d",
     });
 
     res.status(201).json({
