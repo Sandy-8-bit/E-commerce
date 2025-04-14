@@ -9,7 +9,7 @@ const product = require("../Backend/Routes/Admin")
 const getss = require("../Backend/Routes/Products")
 const mail = require("../Backend/Routes/Email")
 const cart = require("../Backend/Routes/Cart")
-
+const razor = require("../Backend/Routes/Razor")
 const cors = require("cors");
 const router = require("./Routes/Admin");
 app.use(cors());
@@ -24,7 +24,12 @@ app.use(product);
 app.use(mail);
 app.use(getss);
 app.use(cart);
+app.use(razor);
 
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // Allow all origins
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
 
 app.listen(PORT,()=> console.log(`Server is running in the ${PORT}`));

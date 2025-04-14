@@ -1,6 +1,9 @@
 import React from "react";
+import {useNavigate} from "react-router-dom"
 
 const Hero = () => {
+
+  const navigate = useNavigate();
   return (
     <div className="flex justify-center md:bg-[url('./Hero.svg')] items-center bg-cover bg-center px-4 md:px-0">
       <div className="left flex flex-col gap-7 py-[50px]  w-full">
@@ -17,7 +20,7 @@ const Hero = () => {
           </p>
         </div>
         <div className="button">
-          <button className="py-3 px-10 sm:py-4 sm:px-[54px] text-white rounded-full bg-black text-sm sm:text-base">
+          <button onClick={()=> navigate("/Product")} className="py-3 hover:scale-3d hover:transform-3d hover:duration-300 hover:scale-105 cursor-pointer px-10 sm:py-4 sm:px-[54px] text-white rounded-full bg-black text-sm sm:text-base">
             Shop Now
           </button>
         </div>

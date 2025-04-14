@@ -6,7 +6,9 @@ const Footer = () => {
       <div className="flex  justify-between px-[20px] md:px-[100px] gap-5 flex-wrap">
         <div className="flex flex-col gap-6 justify-center items-center"> 
           <div>
-            <img src="./Logo.png" alt="logo" />
+          <h2 className="font-bold text-black text-[clamp(1.5rem,4vw,2rem)] mr-4">
+          SHOP.CO
+        </h2>
           </div>
           <div className=" md:w-[248px]">
             <p>

@@ -5,30 +5,35 @@ import Cart from './Cart/Cart';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
-import Contacts from './Pages/Contacts';
-import FullScreen from './Pages/FullScreen';
+
+import FullScreen from './Pages/ProductShowcase';
 import Navbar from './Navbar/Navbar';
-import CartContet from './Context/CartContet';
+import CartProvider from './Context/CartContet';
 import Cartcomp from './Cart/Cartcomp';
 import ProductDetail from './ProductDetail/ProductDetail';
+import UserDetailsForm from './Userdetails/UserDetailsForm';
+import ProfilePage from './Profile/Profile';
+import ProductShowcase from './Pages/ProductShowcase';
 
 function App() {
   return (
-    <CartContet>
-      <div className='px-[20px] md:px-[100px]'>
+    <CartProvider>
+      <div  className='px-[20px] md:px-[100px]'>
         <Navbar />
       </div>
       
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path='/profile' element={<ProfilePage/>} />
+        <Route path='/details' element={<UserDetailsForm/>} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/contact" element={<Contacts />} />
-        <Route path="/Product" element={<FullScreen />} />
+       
+        <Route path="/Product" element={<ProductShowcase />} />
         <Route path="/product/:id" element={<ProductDetail/>} />
       </Routes>
-    </CartContet>
+    </CartProvider>
   );
 }
 

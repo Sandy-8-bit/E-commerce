@@ -3,11 +3,11 @@ import axios from "axios";
 
 const Happycustomer = () => {
   const scrollRef = useRef(null);
-  const [products, setProducts] = useState([]); // Changed data to products to store product list
+  const [products, setProducts] = useState([]);
 
   const handleScroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = 420; // Adjust based on card width + gap
+      const scrollAmount = 420;
       if (direction === "left") {
         scrollRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
       } else {
@@ -18,7 +18,7 @@ const Happycustomer = () => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/getComments"); // Endpoint to fetch products
+      const res = await axios.get("http://localhost:5000/getComments");
       setProducts(res.data);
     } catch (error) {
       console.log(error);
@@ -61,10 +61,15 @@ const Happycustomer = () => {
               className="py-[28px] px-[32px] min-w-[350px] max-w-[450px]  h-[240px] rounded-[20px] border border-black-500 flex flex-col gap-4 "
             >
               <img src="./fivestar.png" alt="star" className="h-10 w-60" />
-              <h3 className="text-black-500 text-[20px] font-[500]">{product.title}</h3>
+              <h3 className="text-black-500 text-[20px] font-[500]">
+                {product.title}
+              </h3>
               {product.reviews && product.reviews.length > 0 ? (
                 product.reviews.map((review) => (
-                  <p key={review._id} className="text-[16px] overflow-x-scroll no-scrollbar text-black font-[400]">
+                  <p
+                    key={review._id}
+                    className="text-[16px] overflow-x-scroll no-scrollbar text-black font-[400]"
+                  >
                     {review.comment}
                   </p>
                 ))

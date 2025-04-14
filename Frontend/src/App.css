@@ -114,14 +114,14 @@ body::-webkit-scrollbar {
 
 @font-face {
   font-family: 'Intergal'; /* Custom font name */
-  src: url('../public/Font/INTERGAL-CF/Fontspring-DEMO-integralcf-demibold.otf') format('opentype'); /* Path to the font */
+  src: url('../Font/INTERGAL-CF/Fontspring-DEMO-integralcf-demibold.otf') format('opentype'); /* Path to the font */
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Satoshi'; /* Custom font name */
-  src: url('../public/Font/Satoshi/Satoshi-Variable.ttf') format('opentype'); /* Path to the font */
+  src: url('..y/Font/Satoshi/Satoshi-Variable.ttf') format('opentype'); /* Path to the font */
   font-weight: normal;
   font-style: normal;
 }
@@ -132,4 +132,19 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
   box-shadow: 0 0 0 1000px white inset !important;
   color: #000 !important;
+}
+
+
+
+@keyframes cart-move {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+.animate-cart-move {
+  animation: cart-move 0.6s infinite ease-in-out;
 }

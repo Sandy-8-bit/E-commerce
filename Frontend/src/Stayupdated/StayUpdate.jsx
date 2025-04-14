@@ -38,17 +38,19 @@ const StayUpdate = () => {
 
   return (
     <div>
-      <div className="bg-black flex justify-between px-[30px] md:px-[64px] py-[36px] rounded-[28px] flex-wrap gap-5">
+      <div className="bg-black justify-center flex  lg:justify-between px-[30px] md:px-[64px] py-[36px] rounded-[28px] flex-wrap gap-5">
         <div className="w-[551px]">
           <h2
             className="text-[40px] font-[700] Intergal-cf text-white"
-            style={{ fontSize: "clamp(24px, 2.5vw, 40px)" }}
+            style={{ fontSize: "clamp(18px, 2.5vw, 40px)" }}
           >
             STAY UP TO DATE ABOUT OUR LATEST OFFERS
           </h2>
         </div>
-        <div className="w-[350px] flex flex-col justify-between gap-[20px]">
-          <div className="w-full relative">
+        <form onSubmit={sendMail} className="h-full">
+        <div className="max-w-[350px] min-w-[300px] flex flex-col justify-between gap-[20px]">
+         
+         <div className="w-full relative">
             <input
               type="email"
               className="w-full bg-white pl-12 pr-4 py-3 rounded-[62px] border border-gray-300 focus:outline-none focus:ring-2 placeholder:text-[16px] focus:ring-black-500"
@@ -64,16 +66,18 @@ const StayUpdate = () => {
               className={`bg-white px-4 w-full py-3 text-[16px] font-[500] text-black rounded-[62px] hover:scale-110 transform duration-300 cursor-pointer ${
                 loading ? "opacity-50 cursor-not-allowed" : ""
               }`}
-              onClick={sendMail}
+              type="submit"
               disabled={loading}
             >
               {loading ? "Subscribing..." : "Subscribe to Newsletter"}
             </button>
           </div>
+       
           {message && (
             <p className="text-white text-center text-sm mt-2">{message}</p>
           )}
         </div>
+        </form>
       </div>
     </div>
   );

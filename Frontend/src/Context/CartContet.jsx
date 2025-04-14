@@ -1,37 +1,83 @@
-import React, { createContext, useState, useContext } from 'react';
+import { createContext,useState,useEffect, act } from "react";
+import axios from "axios"
 
-const CartContext = createContext();
+export const CartContext = createContext();
 
-const CartContet = ({ children }) => {
-  const [cart, setCart] = useState([]);
 
-  const addToCart = (product) => {
-    const existing = cart.find(item => item._id === product._id);
-    if (existing) {
-      setCart(prev =>
-        prev.map(item =>
-          item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
-    } else {
-      setCart(prev => [...prev, { ...product, quantity: 1 }]);
-    }
-  };
+const CartProvider = ({children})=>{
 
-  const removeFromCart = (productId) => {
-    setCart(prev => prev.filter(item => item._id !== productId));
-  };
+  //cart Count
+  const userId = localStorage.getItem("userId");
+    const [cartCount, setCartCount] = useState(0); // State to hold cart count
 
-  const clearCart = () => {
-    setCart([]);
-  };
+    const fetchCartCount = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/cart/${userId}`);
+        if (res.data && Array.isArray(res.data.products)) {
+          setCartCount(res.data.products.length);
+        }
+      } catch (error) {
+        console.error("Error fetching cart count:", error);
+      }
+    };
 
-  return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
+    useEffect(() => {
+      fetchCartCount(); // Fetch cart count when the component mounts
+    }, [userId]);
+
+
+    //top selling context 
+
+      const getProducts = async () => {
+        try {
+          const response = await axios.get("http://localhost:5000/products");
+          setProducts(response.data);
+        } catch (error) {
+          console.error("Error fetching products:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      const [products, setProducts] = useState([]);
+      const [loading, setLoading] = useState(true);
+
+
+
+      useEffect(() => {
+        getProducts();
+      }, []);
+    
+      
+
+      //New Arrival
+
+      const [latest, setLatest] = useState([]); 
+      const [load, setLoad] = useState(false);
+
+      const getLatestProducts = async () => {
+        setLoad(true);
+        try {
+          const res = await axios.get("http://localhost:5000/latestProducts");
+          setLatest(res.data); 
+        } catch (error) {
+          console.log(error);
+        }
+        setLoad(false);
+      };
+    
+      useEffect(() => {
+        getLatestProducts();
+      }, []);
+
+
+
+    
+      return(
+        <CartContext.Provider value={[ cartCount, setCartCount, fetchCartCount , products,setProducts,getProducts ,latest,setLatest ]}>
       {children}
     </CartContext.Provider>
-  );
-};
+      )
+}
 
-export const UseCart = () => useContext(CartContext);
-export default CartContet;
+export default CartProvider

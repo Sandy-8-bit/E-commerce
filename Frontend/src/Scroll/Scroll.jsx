@@ -1,11 +1,10 @@
 import React from 'react';
-import './Scroll.css'; // We’ll define the animation here
-
+import './Scroll.css'; 
 const Scroll = () => {
   return (
     <div className="overflow-hidden bg-black  h-[70px] md:h-[110px] flex items-center">
       <div className="scroll-track flex gap-30 animate-scroll w-max px-10">
-        {/* Duplicate logos to ensure smooth looping */}
+        
         {Array(30).fill([
           './Zara.png',
           './verase.png',

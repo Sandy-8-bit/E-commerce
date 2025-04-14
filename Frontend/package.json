@@ -11,12 +11,19 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@multiavatar/multiavatar": "^1.0.7",
     "@tailwindcss/vite": "^4.0.17",
     "axios": "^1.8.4",
+    "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.487.0",
     "motion": "^12.6.3",
+    "rc-slider": "^11.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.4.1",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.0.17"
   },
   "devDependencies": {

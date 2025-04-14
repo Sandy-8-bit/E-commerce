@@ -102,3 +102,47 @@ exports.Login = async (req, res) => {
         }
     };
     
+
+
+
+    exports.getUserDetails = async (req, res) => {
+        try {
+          const userId = req.body.userId; // Get the user ID from the request body
+          if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+          }
+      
+          // Fetch the user details by ID without checking for a token
+          const user = await User.findById(userId).select("-password"); // Don't return the password in response
+          if (!user) {
+            return res.status(404).json({ message: "User not found" });
+          }
+      
+          res.json(user); // Return the user details
+        } catch (error) {
+          res.status(500).json({ message: "Server Error", error: error.message });
+        }
+      };
+      
+
+// Update user details
+ exports.updateUserDetails = async (req, res) => {
+  try {
+      const userId = req.body.userId; // Get the user ID from the request body
+      if (!userId) {
+          return res.status(400).json({ message: "User ID is required" });
+      }
+
+      const updatedDetails = req.body; // Collect details from the request body
+      delete updatedDetails.userId; // Remove userId from the body before saving
+
+      const user = await User.findByIdAndUpdate(userId, updatedDetails, { new: true });
+      if (!user) {
+          return res.status(404).json({ message: "User not found" });
+      }
+
+      res.json(user); // Return the updated user
+  } catch (error) {
+      res.status(500).json({ message: "Server Error", error: error.message });
+  }
+};
