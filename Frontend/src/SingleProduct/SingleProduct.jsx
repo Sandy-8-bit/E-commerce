@@ -1,45 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
+import { CartContext } from '../Context/CartContet';
 const SingleProduct = ({ product, index, renderStars, isCartPage = false }) => {
   const actualProduct = product.productId || product;
   const userId = localStorage.getItem("userId");
-
+  const [,,,addToCart] = useContext(CartContext)
   const [showModal, setShowModal] = useState(false);
+  const [,,,,,,,,, removeCart] = useContext(CartContext)
 
-  const removeCart = async () => {
-    try {
-      await axios.delete("http://localhost:5000/removeCart", {
-        data: {
-          userId,
-          productId: actualProduct._id,
-        },
-      });
-      toast.info("❌ Removed from cart!");
-      window.location.reload();
-    } catch (error) {
-      console.error("Error removing from cart:", error);
-    }
-  };
 
-  const addCart = async () => {
-    try {
-      await axios.post("http://localhost:5000/addCart", {
-        userId,
-        productId: actualProduct._id,
-      });
-      toast.success("🛒 Added to cart!");
-    } catch (error) {
-      console.log("Error adding to cart:", error);
-    }
-  };
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
+      
 
   
       <div className="w-[300px] rounded-[20px] flex flex-col gap-3 p-4 shadow-md bg-white">
@@ -74,7 +49,7 @@ const SingleProduct = ({ product, index, renderStars, isCartPage = false }) => {
         <div className="flex gap-2 mt-3 justify-center flex-wrap">
           {isCartPage ? (
             <button
-              onClick={removeCart}
+              onClick={()=>removeCart(actualProduct._id)}
               className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-full text-sm"
             >
               ❌ Remove
@@ -82,7 +57,7 @@ const SingleProduct = ({ product, index, renderStars, isCartPage = false }) => {
           ) : (
             <>
               <button
-                onClick={addCart}
+                onClick={() => addToCart(actualProduct._id)}
                 className="px-4 py-2 border border-black text-black rounded-[9px] text-sm hover:bg-black hover:text-white transition"
               >
                 🛒 Add to Cart
@@ -104,7 +79,7 @@ const SingleProduct = ({ product, index, renderStars, isCartPage = false }) => {
           <div className="bg-white rounded-[20px] max-w-[600px] w-full p-6 relative shadow-lg animate-fade-in">
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-600 hover:text-black text-xl"
+              className="absolute top-4 right-4 text-gray-600 cursor-pointer hover:text-black text-xl"
             >
               &times;
             </button>
@@ -126,7 +101,7 @@ const SingleProduct = ({ product, index, renderStars, isCartPage = false }) => {
                   )}
                 </div>
                 <button
-                  onClick={addCart}
+                  onClick={() => addToCart(actualProduct._id)}
                   className="mt-2 px-4 py-2 bg-black text-white rounded-[10px] hover:bg-gray-800 transition"
                 >
                   🛒 Add to Cart

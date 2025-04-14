@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+
 import { useNavigate } from 'react-router-dom';
 import SingleProduct from '../SingleProduct/SingleProduct';
 import renderStars from "../Utils/Renderstars";
 import { CartContext } from '../Context/CartContet';
 
 const TopSelling = () => {
-  
-  const [, , , products] = useContext(CartContext);
+  const [, , , , products] = useContext(CartContext);
   const [page, setPage] = useState(1);
   const productsPerPage = 4;
   const navigate = useNavigate();
-
   const startIndex = (page - 1) * productsPerPage;
   const paginatedProducts = products.slice(startIndex, startIndex + productsPerPage);
 

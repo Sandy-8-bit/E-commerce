@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Cartcomp from '../Cart/Cartcomp';
 import Footer from '../Footer/Footer';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { CartContext } from '../Context/CartContet';
 
 const Cart = () => {
-  const [cartProducts, setCartProducts] = useState([]);
+  const [,,,,,,,,,,,cartProducts ] =useContext(CartContext)
+  const[,,,,,,,,,,,,setCartProducts]=useContext(CartContext)
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [cartCount, setCartCount] = useState(0);
   const userId = localStorage.getItem("userId");
+  const [,,,,,,,,,,handleRemoveItem] =useContext(CartContext)
 
 
   const getCart = async () => {
@@ -55,20 +56,7 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveItem = async (productId) => {
-    try {
-      await axios.delete("http://localhost:5000/removeCart", {
-        data: { userId, productId },
-      });
-      setCartProducts((prev) =>
-        prev.filter((item) => item.productId._id !== productId)
-      );
-      toast.success("🗑️ Item removed");
-    } catch (error) {
-      console.error("Error removing item:", error);
-      toast.error("❌ Failed to remove item");
-    }
-  };
+ 
 
   const removeAllCart = async () => {
     try {
@@ -189,7 +177,7 @@ const Cart = () => {
 
   return (
     <div className="w-full">
-      <ToastContainer position="top-right" autoClose={3000} />
+     
       <div className="px-4 sm:px-6 md:px-10 lg:px-20">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-bold">Your Cart</h2>

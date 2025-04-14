@@ -9,7 +9,7 @@ const ProductShowcase = () => {
   const [filters, setFilters] = useState({
     category: '',
     brand: '',
-    minPrice: 50,
+    minPrice: 0,
     maxPrice: 200,
     minRating: '',
     title: ''
@@ -89,7 +89,7 @@ const ProductShowcase = () => {
   useEffect(() => {
     fetchProducts();
     
-  }, [filters, currentPage]);
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -119,7 +119,7 @@ const ProductShowcase = () => {
             <label className="block text-sm font-medium mb-1">Price Range: ₹{filters.minPrice} - ₹{filters.maxPrice}</label>
             <Slider
               range
-              min={50}
+              min={0}
               max={500}
               defaultValue={[filters.minPrice, filters.maxPrice]}
               onChange={handlePriceChange}
@@ -153,7 +153,7 @@ const ProductShowcase = () => {
             )}
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
               <label className="text-sm font-medium">Dress Style</label>
               <button onClick={() => toggleSection('dressStyle')}>
@@ -174,7 +174,7 @@ const ProductShowcase = () => {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
 
           <button onClick={applyFilters} className="w-full mt-4 py-3 bg-black text-white rounded-md">
             Apply Filter

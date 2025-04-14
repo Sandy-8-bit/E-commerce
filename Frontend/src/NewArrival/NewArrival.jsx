@@ -8,7 +8,7 @@ import { CartContext } from "../Context/CartContet";
 
 const NewArrival = () => {
 
-  const [,,,latest] = useContext(CartContext)
+  const [,,,,,,,latest] = useContext(CartContext)
   const productsHere = 4;
   const navigate = useNavigate();
   const [page,setpage] = useState(1)

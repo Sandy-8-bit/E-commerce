@@ -6,7 +6,7 @@ import { CartContext } from "../Context/CartContet";
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
-  const [cartCount,setCartCount]= useContext(CartContext)
+  const [cartCount]= useContext(CartContext)
   const [name, setName] = useState("");
   const [profile, setProfile] = useState("");
 
