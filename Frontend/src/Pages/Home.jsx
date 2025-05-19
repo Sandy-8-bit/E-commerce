@@ -46,7 +46,7 @@ const Home = () => {
         <div className='px-[20px] md:px-[100px]'>
           <StayUpdate />
         </div>
-        <div className='mt-[50px]'>
+        <div id='contact' className='mt-[50px]'>
           <Footer />
         </div>
       </div>

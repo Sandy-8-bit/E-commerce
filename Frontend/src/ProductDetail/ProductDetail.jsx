@@ -5,6 +5,8 @@ import Footer from "../Footer/Footer";
 import { MessageSquare } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useContext } from "react";
+import { CartContext } from "../Context/CartContet";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -16,8 +18,9 @@ const ProductDetail = () => {
   const [userRating, setUserRating] = useState(5); // Default rating is 5
   const [isCommenting, setIsCommenting] = useState(false);
   const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("userName");
   const [showAllReviews, setShowAllReviews] = useState(false);
-
+  const[,,,addCart] = useContext(CartContext);
 
   const getProduct = async () => {
     try {
@@ -53,20 +56,7 @@ const ProductDetail = () => {
     return stars;
   };
 
-  const addCart = async () => {
-    try {
-      await axios.post("http://localhost:5000/addCart", {
-        userId: userId,
-        productId: id,
-      },  { headers: {
-        'Content-Type': 'application/json',
-      }});
-   
-      alert("Added to cart");
-    } catch (error) {
-      console.log("Error adding to cart:", error);
-    }
-  };
+
 
   const handleCommentSubmit = async () => {
     try {
@@ -74,6 +64,7 @@ const ProductDetail = () => {
         comment: userComment,
         rating: userRating,
         userId: userId,
+        name: userName,
       });
       toast.success("Comment added successfully!");
       setUserComment(""); // Clear the input after submission
@@ -181,7 +172,7 @@ const ProductDetail = () => {
                   </button>
                 </div>
                 <button
-                  onClick={addCart}
+                  onClick={()=>addCart(id)}
                   className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-900 transition"
                 >
                   Add to Cart

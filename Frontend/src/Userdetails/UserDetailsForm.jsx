@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/userContext";
+
+import { useContext } from "react";
 
 const UserDetailsForm = () => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
 
-  const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    country: "",
-    upiId: "",
-  });
+  const [originalData,formData,setFormData,setOriginalData,loading]=useContext(UserContext)
 
-  const [originalData, setOriginalData] = useState({});
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await axios.post("/api/user/profile", { userId }, {
+        const response = await axios.post("http://localhost:5000/api/user/profile", { userId }, {
           headers: { "Content-Type": "application/json" },
         });
 
@@ -37,7 +29,7 @@ const UserDetailsForm = () => {
           postalCode: response.data.postalCode || "",
           country: response.data.country || "",
           upiId: response.data.upiId || "",
-        };
+        };  
 
         setFormData(userDetails);
         setOriginalData(userDetails);
@@ -67,6 +59,7 @@ const UserDetailsForm = () => {
 
     if (!hasChanged) {
       alert("No changes made.");
+      navigate("/");
       return;
     }
 

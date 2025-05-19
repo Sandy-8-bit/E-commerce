@@ -28,6 +28,7 @@
           const userId = response.data.user.id;
           localStorage.setItem("token", token);
           localStorage.setItem("userId", userId);
+          localStorage.setItem("userName", response.data.user.name);
           alert("Logged in successfully!");
           navigate("/details");
         } catch (error) {

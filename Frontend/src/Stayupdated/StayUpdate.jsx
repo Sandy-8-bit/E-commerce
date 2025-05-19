@@ -48,9 +48,9 @@ const StayUpdate = () => {
           </h2>
         </div>
         <form onSubmit={sendMail} className="h-full">
-        <div className="max-w-[350px] min-w-[300px] flex flex-col justify-between gap-[20px]">
+        <div className="max-w-[350px] sm:min-w-[250px] md:min-w-[300px] flex flex-col justify-between gap-[20px]">
          
-         <div className="w-full relative">
+         <div className="w-full relative">    
             <input
               type="email"
               className="w-full bg-white pl-12 pr-4 py-3 rounded-[62px] border border-gray-300 focus:outline-none focus:ring-2 placeholder:text-[16px] focus:ring-black-500"

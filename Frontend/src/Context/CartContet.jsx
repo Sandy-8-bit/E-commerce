@@ -1,4 +1,4 @@
-import { createContext,useState,useEffect, act } from "react";
+import { createContext,useState,useEffect,  } from "react";
 import axios from "axios"
 
 import { toast } from "react-toastify";
@@ -76,19 +76,33 @@ const CartProvider = ({children})=>{
       
       //add Cart
 
-
       const addCart = async (productId) => {
         try {
+          
+          const { data } = await axios.get(`http://localhost:5000/cart/${userId}`);
+          const cartItems = data.products || [];
+      
+         
+          const alreadyInCart = cartItems.some(item => item.productId._id === productId || item.productId === productId);
+      
+          if (alreadyInCart) {
+            toast.error("⚠️ Already in cart!");
+            return;
+          }
+      
           await axios.post("http://localhost:5000/addCart", {
             userId,
             productId,
           });
+      
           fetchCartCount();
           toast.success("🛒 Added to cart!");
         } catch (error) {
           console.log("Error adding to cart:", error);
+          toast.error("❌ Failed to add to cart");
         }
       };
+      
       
 
       //remove cart
@@ -126,9 +140,62 @@ const CartProvider = ({children})=>{
       };
       const [cartProducts, setCartProducts] = useState([]);
 
+
+
+      //remove all cart
+
+      const removeAllCart = async () => {
+        try {
+          
+          const res = await axios.post("http://localhost:5000/deleteallcart", {
+            userId,
+          });
+          
+          if (res.status === 200) {
+            fetchCartCount()
+            toast.success("🛒 All items removed!");
+            getCart();
+          }
+
+        } catch (err) {
+          console.error("Failed to clear cart:", err);
+          toast.error("❌ Could not clear cart");
+        }
+      };
+
+
+      //getcart 
+
+
+        const [isLoading, setIsLoading] = useState(true);
+      const getCart = async () => {
+          try {
+            setIsLoading(true);
+            const res = await axios.get(`http://localhost:5000/cart/${userId}`);
+            if (res.data && Array.isArray(res.data.products)) {
+              const updatedProducts = res.data.products
+                .filter(item => item.productId && item.productId.price)
+                .map((item) => ({
+                  ...item,
+                  quantity: item.quantity || 1,
+                }));
+              setCartProducts(updatedProducts);
+            } else {
+              setCartProducts([]);
+            }
+          } catch (error) {
+            console.error("Error fetching cart:", error);
+            toast.error("❌ Failed to load cart");
+          } finally {
+            setIsLoading(false);
+          }
+        };
+      
+    
+      
     
       return(
-        <CartContext.Provider value={[ cartCount, setCartCount, fetchCartCount ,addCart, products,setProducts,getProducts ,latest,setLatest,removeCart ,handleRemoveItem,cartProducts,setCartProducts]}>
+        <CartContext.Provider value={[ cartCount, setCartCount, fetchCartCount ,addCart, products,setProducts,getProducts ,latest,setLatest,removeCart ,handleRemoveItem,cartProducts,setCartProducts,removeAllCart,getCart,isLoading]}>
       {children}
     </CartContext.Provider>
       )

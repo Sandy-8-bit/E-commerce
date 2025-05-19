@@ -13,58 +13,22 @@ import {
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import multiavatar from "@multiavatar/multiavatar";
+import { useContext } from "react";
+import { UserContext } from "../Context/userContext";
 
 const ProfilePage = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "",
-  });
+  const [originalData,formData,setFormData,setOriginalData,loading]=useContext(UserContext)
+
 
   const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
 
-  const [originalData, setOriginalData] = useState({});
-  const [loading, setLoading] = useState(true);
+  
+ const [,,,,,,name] = useContext(UserContext)
   const [saving, setSaving] = useState(false);
   const userId = localStorage.getItem("userId");
 
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.post("http://localhost:5000/getuserss", {
-          userId,
-        });
-        const userDetails = response.data;
 
-        const updatedForm = {
-          fullName: userDetails.fullName || "",
-          phoneNumber: userDetails.phoneNumber || "",
-          addressLine1: userDetails.addressLine1 || "",
-          addressLine2: userDetails.addressLine2 || "",
-          city: userDetails.city || "",
-          state: userDetails.state || "",
-          zipCode: userDetails.zipCode || "",
-          country: userDetails.country || "",
-        };
-
-        setFormData(updatedForm);
-        setOriginalData(updatedForm);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching user details:", error);
-        setLoading(false);
-        toast.error("Failed to load profile.");
-      }
-    };
-
-    fetchUserDetails();
-  }, [userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -122,7 +86,7 @@ const ProfilePage = () => {
         addressLine2: response.data.addressLine2 || "",
         city: response.data.city || "",
         state: response.data.state || "",
-        zipCode: response.data.postalCode || "",
+        postalCode: response.data.postalCode || "",
         country: response.data.country || "",
       };
 
@@ -180,7 +144,7 @@ const ProfilePage = () => {
                   <div
                     className="w-full h-full"
                     dangerouslySetInnerHTML={{
-                      __html: multiavatar(formData.fullName || "User"),
+                      __html: multiavatar(name || "User"),
                     }}
                   />
                 </div>

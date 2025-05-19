@@ -10,7 +10,7 @@ const ProductShowcase = () => {
     category: '',
     brand: '',
     minPrice: 0,
-    maxPrice: 200,
+    maxPrice: 2000,
     minRating: '',
     title: ''
   });
@@ -18,9 +18,8 @@ const ProductShowcase = () => {
   const [debouncedTitle, setDebouncedTitle] = useState(filters.title);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const categories = ["T-shirts", "Shorts", "Shirts", "Hoodie", "Jeans"];
-  const brands = ["Brand A", "Brand B", "Brand C", "Brand D"];
-  const dressStyles = ["Casual", "Formal", "Party", "Gym"];
+  const categories = ["T-shirt", "Shorts", "Shirts", "Hoodie", "Jeans"];
+  const brands = ["Puma", "Adidas", "Nike", "Reebok", "Zara", "H&M", "Levis", "Wrangler"];
   const sizes = ["XX-Small", "X-Small", "Small", "Medium", "Large", "X-Large", "XX-Large", "3X-Large", "4X-Large"];
   const [selectedSize, setSelectedSize] = useState("Large");
 
@@ -120,7 +119,7 @@ const ProductShowcase = () => {
             <Slider
               range
               min={0}
-              max={500}
+              max={2000}
               defaultValue={[filters.minPrice, filters.maxPrice]}
               onChange={handlePriceChange}
               trackStyle={{ backgroundColor: '#000', height: 6 }}
